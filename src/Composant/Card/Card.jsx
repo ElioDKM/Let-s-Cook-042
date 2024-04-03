@@ -10,7 +10,7 @@ export default function Card({ data }) {
           <article className="shrink grow basis-72 m-2 shadow-lg rounded-xl" key={element.id}>
             <div className="relative">
               <img src={element.imageUrl} alt={element.title} className="rounded-xl"/>
-              <Like></Like>
+              <Like element={element}></Like>
             </div>
             <div className="p-3" >
               <h3 className="text-xl text-red-800">{element.title}</h3>

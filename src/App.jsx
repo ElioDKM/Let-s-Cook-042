@@ -1,39 +1,72 @@
 import './App.css'
-import { useState } from "react"
-
+import { useState, useEffect } from "react"
 import recettes from './assets/json/recettes.json'
 import Card from './Composant/Card/Card';
+import SearchBar from './Composant/Searchbar/SearchBar';
+import ButtonLike from './Composant/ButtonLike/ButtonLike';
+console.log("Recettes :");
+console.log(recettes);
 
 function App() {
-  console.log(recettes);
-  const [searchInput, setSearchInput] = useState("");
+
   const [tabFiltred, setTabFiltred] = useState([])
+  const [tabLiked, setTabLiked] = useState([])
+  const [likePage, setLikePage] = useState(false)
+  const [searchInput, setSearchInput] = useState("");
+    
 
   const handleChange = (e) => {
-    setTabFiltred([])
-    if (!searchInput.trim()) return;
-    setSearchInput(e.target.value.toLowerCase());
-    setTabFiltred(recettes.filter((recette) => recette.category.toLowerCase().includes(searchInput)))
+    setSearchInput(e.target.value);
   };
   
+  function likeFiltre() {
+    const filteredlike = recettes.filter((recette) => recette.isLike);
+    setTabLiked(filteredlike)
+  }
+  useEffect(() => likeFiltre(), [likePage])
+  
 
-
+  function filtrage() {
+    let filtred
+    if (!likePage) {
+      filtred = recettes.filter((recette) => {
+        return recette.category.toLowerCase().includes(searchInput.toLowerCase()) || recette.description.toLowerCase().includes(searchInput.toLowerCase())
+      })
+    }else{
+      filtred = tabLiked.filter((recette) => {
+        return recette.category.toLowerCase().includes(searchInput.toLowerCase()) || recette.description.toLowerCase().includes(searchInput.toLowerCase())
+      })
+    }
+    setTabFiltred(filtred)
+  }
+  useEffect(() => filtrage(), [searchInput, likePage])
 
   return (
     <>
-    <div className=' max-w-6xl mx-[auto]'>
-      <h1 className='text-5xl font-semibold text-red-800'>Let's Cook</h1>
-      <div>
-        <input
-          type="text"
-          placeholder="Search here"
-          onChange={handleChange}
-          value={searchInput} />
+      <div className=' max-w-6xl mx-[auto] px-1 py-8'>
+        <h1 className='text-5xl font-semibold text-red-800 mb-8'>Let's Cook</h1>
+        <div className='flex w-full gap-8 mb-4'>
+          <SearchBar handleChange={handleChange} searchInput={searchInput}></SearchBar>
+          <ButtonLike setLikePage={setLikePage} likePage={likePage} setTabLiked={setTabLiked} recettes={recettes}></ButtonLike>
+        </div>
+        {!likePage ? (
+          <>
+            {tabFiltred.length == recettes.length ? (
+              <h3 className='text-xl'>Toutes les recettes :</h3>
+            ) : (
+              <h3 className='text-xl'>Résultats de la recherche :</h3>
+            )}
+            {tabFiltred.length === 0 ?  <p>Not found</p> : <Card data={tabFiltred}></Card> }
+          </>
+        ) : (
+          <>
+            <h3 className='text-xl'>Recettes favorites :</h3>
+            {tabFiltred.length === 0 ?  <p>Not found</p> : <Card data={tabFiltred}></Card> }           
+          </>
+        )}
       </div>
-      <Card data={tabFiltred.length > 0 ? tabFiltred : recettes}></Card>
-    </div>
     </>
-  )
+  );
 }
 
 export default App
