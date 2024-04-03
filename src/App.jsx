@@ -1,33 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { useState } from "react"
+
+import recettes from './assets/json/recettes.json'
+import Card from './Composant/Card/Card';
 
 function App() {
-  const [count, setCount] = useState(0)
+  console.log(recettes);
+  const [searchInput, setSearchInput] = useState("");
+  const [tabFiltred, setTabFiltred] = useState([])
+
+  const handleChange = (e) => {
+    setTabFiltred([])
+    if (!searchInput.trim()) return;
+    setSearchInput(e.target.value.toLowerCase());
+    setTabFiltred(recettes.filter((recette) => recette.category.toLowerCase().includes(searchInput)))
+  };
+  
+
+
 
   return (
     <>
+    <div className=' max-w-6xl mx-[auto]'>
+      <h1 className='text-5xl font-semibold text-red-800'>Let's Cook</h1>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <input
+          type="text"
+          placeholder="Search here"
+          onChange={handleChange}
+          value={searchInput} />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Card data={tabFiltred.length > 0 ? tabFiltred : recettes}></Card>
+    </div>
     </>
   )
 }
