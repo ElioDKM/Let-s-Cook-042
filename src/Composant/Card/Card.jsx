@@ -20,7 +20,7 @@ export default function Card({ data }) {
                 </div>
                 <p>{element.author}</p>
                 <Star difficulty={element.difficulty} />
-                <p className="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">{element.category}</p>
+                <p className="bg-red-900 text-red-300 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full ">{element.category}</p>
               </div>
               <p>{element.description}</p>
               <div className="flex justify-end">
