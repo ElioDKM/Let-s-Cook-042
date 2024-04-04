@@ -1,8 +1,11 @@
 # Let's Cook V2 - Site Web
 
-Ce projet est un site web conçu pour permettre aux utilisateurs de découvrir et explorer une variété de recettes de cuisine. Avec une interface conviviale et des fonctionnalités pratiques, les amateurs de cuisine peuvent trouver et organiser leurs recettes préférées en un seul endroit.
+Ce projet est un projet react qui permet aux utilisateurs de découvrir et explorer une variété de recettes de cuisine. Avec une interface conviviale et des fonctionnalités pratiques, les amateurs de cuisine peuvent trouver et organiser leurs recettes préférées en un seul endroit.
 
-## Fonctionnalités
+### Lien du site
+[Let's Cook V2](https://let-s-cook-042.vercel.app/)
+
+## Feature
 
 ### Affichage des Recettes
 - Le site affiche toutes les recettes disponibles, avec leurs informations telles que le titre, la difficulté, la catégorie, la description, l'image, la date et l'auteur.
