@@ -35,5 +35,9 @@ Ce projet m'a également permis de m'initier à l'utilisation de Tailwind CSS, u
 
 N'hésitez pas à explorer et à contribuer à ce projet pour le rendre encore plus utile et attrayant pour les amateurs de cuisine !
 
+## Screen
+![image](https://github.com/ElioDKM/Let-s-Cook-042/assets/154247058/6229783f-5473-4c93-a478-47fcc8384a0d)
+
+
 ---
 *Auteur: [Elio DIKOUME](https://github.com/ElioDKM)*
